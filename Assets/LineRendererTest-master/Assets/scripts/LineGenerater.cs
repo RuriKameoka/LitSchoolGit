@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class LineGenerater : MonoBehaviour {
-	[SerializeField]
+	//[SerializeField]
 	bool isPressed;
 
 	Vector3 startPressPosition;

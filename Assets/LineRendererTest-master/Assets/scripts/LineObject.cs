@@ -8,7 +8,8 @@ public class LineObject : MonoBehaviour {
 	LineRenderer lineRenderer;
 	public bool isPressed;
 
-	int lineObjectNum;
+	// Edge colloder
+	EdgeCollider2D edgeCollider;
 
 	// Use this for initialization
 	void Start () {
@@ -17,8 +18,12 @@ public class LineObject : MonoBehaviour {
 		lineRenderer.enabled = false;
 		lineRenderer.SetPosition(0,transform.position);
 
+		// Edge colloder
+		edgeCollider = this.GetComponent<EdgeCollider2D>();
 
 		isPressed = true;
+
+		Destroy(gameObject, 5.0f);
 	}
 
 	// Update is called once per frame
@@ -30,7 +35,9 @@ public class LineObject : MonoBehaviour {
 			lineRenderer.SetPosition(1,nowPressPosition);
 			lineRenderer.enabled = true;
 
-
+			// edge collider
+			Vector2 tempColPosition = (Vector2)nowPressPosition - (Vector2)transform.position;
+			edgeCollider.points = new Vector2[] {new Vector2(0, 0), tempColPosition};
 		}
 
 		if(Input.GetMouseButtonUp(0)){
@@ -39,7 +46,8 @@ public class LineObject : MonoBehaviour {
 			Debug.Log(endPressPosition);
 
 			isPressed = false;
-
 		}
+
 	}
+
 }
